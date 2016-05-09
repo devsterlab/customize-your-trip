@@ -1,7 +1,9 @@
 Customize your trip
 =====================
 
-Webpack, React, Redux, ES6, Foundation
+Technology stack: Webpack, React, Redux, ES6, Foundation
+
+[Demo](http://devsterlab.com/portfolio/customize-your-trip) - http://devsterlab.com/portfolio/customize-your-trip
 
 ### Usage
 
@@ -10,8 +12,6 @@ npm install
 npm start
 open http://localhost:8080
 ```
-
-Now edit `src/components/App.js`.
 
 ### Linting
 
