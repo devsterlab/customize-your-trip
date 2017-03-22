@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import history from '../../util/history';
 import * as actions from '../../actions/summary';
 import DateHelper from '../../util/dateHelper';
@@ -53,7 +53,7 @@ class Summary extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { steps: props.steps };
+        this.state = {steps: props.steps};
     }
 
     componentWillMount() {
@@ -66,7 +66,7 @@ class Summary extends Component {
                 .slice(0, props.index)
                 .concat([props.currentStep])
                 .concat(props.steps.slice(props.index, props.steps.length))
-                || props.steps
+            || props.steps
         });
     }
 
@@ -113,7 +113,7 @@ class Summary extends Component {
     }
 
     render() {
-        let { homeCity, days, price, flights, hotels, cars } = this.props;
+        let {homeCity, days, price, flights, hotels, cars} = this.props;
         let steps = this.state.steps;
         const summaryAvailable = steps.length;
         if (summaryAvailable) {
@@ -130,11 +130,17 @@ class Summary extends Component {
                 <h3 className="header">
                     Your <strong>trip summary</strong> looks great!
                 </h3>
-                {!tripFinished && <Button className="success float-right large continue-button" link="/flight"
-                        onClick={() => this.handleContinueClick()}>
+                {!tripFinished &&
+                <Button
+                    className="success float-right large continue-button"
+                    link="/flight"
+                    onClick={() => this.handleContinueClick()}
+                >
                     Continue
                 </Button>}
+
                 <hr className="divider"/>
+
                 <Timeline>
                     {steps.map((step, index) => {
                         const flight = flights[step.flight], hotel = hotels[step.hotel], car = cars[step.car];
@@ -149,61 +155,92 @@ class Summary extends Component {
                         }
                         return (
                             <div key={index}>
-                                {isFirstStep && <Category>
+                                {isFirstStep &&
+                                <Category>
                                     <Title date={step.date} icon="mdi-home">{flight.fromCity.name}</Title>
                                     <Item icon="mdi-airplane" className="last">
                                         <Content>
                                             <FlightCard flight={flight} date={step.date}/>
                                         </Content>
-                                        <Actions onEdit={() => this.editItem(step, index, 'flight')}
-                                                 onRemove={() => this.handleRemoveItem(step, index, 'flight')}/>
+                                        <Actions
+                                            onEdit={() => this.editItem(step, index, 'flight')}
+                                            onRemove={() => this.handleRemoveItem(step, index, 'flight')}
+                                        />
                                     </Item>
                                 </Category>}
+
                                 <Category className={isFinish && 'last' || ''}>
-                                    <Title date={isFinish && step.dateTo || step.dateFrom} icon={isHome && 'mdi-home' || 'mdi-city'}
-                                           secondary={isFinish && finishSecondary || secondary}>
+                                    <Title
+                                        date={isFinish && step.dateTo || step.dateFrom}
+                                        icon={isHome && 'mdi-home' || 'mdi-city'}
+                                        secondary={isFinish && finishSecondary || secondary}
+                                    >
                                         {isFinish &&
                                         <span>Trip end:&nbsp;
-                                            <strong>${price  || 0}</strong>
+                                            <strong>${price || 0}</strong>
                                         </span> ||
                                         flight.toCity.name}
                                     </Title>
+
                                     {!isFinish && <div>
                                         <Item icon="mdi-hotel" className={(!car && isLastStep) && 'last' || ''}>
                                             <Content>
-                                                <HotelCard hotel={hotel} price={hotel.price} days={step.hotelDays} spinnerParent=".timeline"/>
+                                                <HotelCard
+                                                    hotel={hotel}
+                                                    price={hotel.price}
+                                                    days={step.hotelDays}
+                                                    spinnerParent=".timeline"
+                                                />
                                             </Content>
-                                            <Actions onEdit={() => this.editItem(step, index, 'hotel')}
-                                                     onRemove={() => this.handleRemoveItem(step, index, 'hotel')}/>
+                                            <Actions
+                                                onEdit={() => this.editItem(step, index, 'hotel')}
+                                                onRemove={() => this.handleRemoveItem(step, index, 'hotel')}
+                                            />
                                         </Item>
                                         {car && <Item icon="mdi-car" className={isLastStep && 'last' || ''}>
                                             <Content>
-                                                <CarCard car={car} price={car.price} days={step.carDays} spinnerParent=".timeline"/>
+                                                <CarCard
+                                                    car={car}
+                                                    price={car.price}
+                                                    days={step.carDays}
+                                                    spinnerParent=".timeline"
+                                                />
                                             </Content>
-                                            <Actions onEdit={() => this.editItem(step, index, 'car')}
-                                                     onRemove={() => this.handleRemoveItem(step, index, 'car')}/>
+                                            <Actions
+                                                onEdit={() => this.editItem(step, index, 'car')}
+                                                onRemove={() => this.handleRemoveItem(step, index, 'car')}
+                                            />
                                         </Item>}
-                                        {!isLastStep && <Item icon="mdi-airplane" className="last">
+                                        {!isLastStep &&
+                                        <Item icon="mdi-airplane" className="last">
                                             <Content>
                                                 <FlightCard flight={nextStepFlight} date={nextStep.date}/>
                                             </Content>
-                                            <Actions onEdit={() => this.editItem(nextStep, index + 1, 'flight')}
-                                                     onRemove={() => this.handleRemoveItem(nextStep, index + 1, 'flight')}/>
+                                            <Actions
+                                                onEdit={() => this.editItem(nextStep, index + 1, 'flight')}
+                                                onRemove={() => this.handleRemoveItem(nextStep, index + 1, 'flight')}
+                                            />
                                         </Item> || ''}
                                     </div>}
                                 </Category>
                             </div>
                         );
                     })}
-                    {!tripFinished && <Category className="last">
+
+                    {!tripFinished &&
+                    <Category className="last">
                         <Title date={lastStep.dateTo} icon="mdi-flag-checkered" secondary={finishSecondary}>
                             Trip end:&nbsp;
                             <strong>${price || 0}</strong>
                         </Title>
                     </Category>}
                 </Timeline>
-                <RemoveItemModal removeData={this.getModalData()} onRemove={() => this.removeItem()}
-                                 onClose={() => this.closeRemoveModal()}/>
+
+                <RemoveItemModal
+                    removeData={this.getModalData()}
+                    onRemove={() => this.removeItem()}
+                    onClose={() => this.closeRemoveModal()}
+                />
             </div> ||
             <div className="height-100">
                 <h2 className="subheader text-center">Flight or hotel not selected</h2>

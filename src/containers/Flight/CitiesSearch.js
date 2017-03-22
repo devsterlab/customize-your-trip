@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 
@@ -34,7 +34,7 @@ class CitiesSearch extends Component {
         let otherCity = this.props['selectedCity' + to];
         if (city && otherCity) Object.assign(state, this.handleCitiesEqual(city._id, otherCity));
         this.setState(state);
-        this.props.onCityChange(city && city._id, from, this.canSearch(city  && otherCity, state));
+        this.props.onCityChange(city && city._id, from, this.canSearch(city && otherCity, state));
     }
 
     handleCityNotFound(city, fromTo) {
@@ -56,20 +56,32 @@ class CitiesSearch extends Component {
     render() {
         return (
             <form className="row">
-                <Select className="medium-5 columns" error={this.state.errorCityFrom} readOnly={!!this.props.lastCityFrom}
-                        getCollection={this.props.getCities} itemId={this.props.selectedCityFrom}
-                        nameField="name" placeholder="Where you want to start" onChange={this.handleCityFromChange}>
-                    From city
-                </Select>
-                <Select className="medium-5 columns" error={this.state.errorCityTo} readOnly={!!this.props.lastCityTo}
-                        getCollection={this.props.getCities} itemId={this.props.selectedCityTo}
-                        nameField="name" placeholder="Where you travel" onChange={this.handleCityToChange}>
-                    To city
-                </Select>
+                <Select
+                    className="medium-5 columns"
+                    error={this.state.errorCityFrom}
+                    readOnly={!!this.props.lastCityFrom}
+                    getCollection={this.props.getCities}
+                    itemId={this.props.selectedCityFrom}
+                    nameField="name" placeholder="Where you want to start"
+                    onChange={this.handleCityFromChange}
+                >From city</Select>
+
+                <Select
+                    className="medium-5 columns"
+                    error={this.state.errorCityTo}
+                    readOnly={!!this.props.lastCityTo}
+                    getCollection={this.props.getCities}
+                    itemId={this.props.selectedCityTo}
+                    nameField="name" placeholder="Where you travel"
+                    onChange={this.handleCityToChange}
+                >To city</Select>
+
                 <div className="medium-2 columns">
-                    <Button className="inline-button" onClick={this.props.onFlightsSearch} disabled={!this.canSearch()}>
-                        Search
-                    </Button>
+                    <Button
+                        className="inline-button"
+                        onClick={this.props.onFlightsSearch}
+                        disabled={!this.canSearch()}
+                    >Search</Button>
                 </div>
             </form>
         );

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import Modal from '../../components/Modal';
 import Button from '../../components/Button';
 
@@ -43,7 +43,12 @@ class RemoveItemModal extends Component {
     render() {
         let {removeData, onRemove, ...other} = this.props;
         return (
-            <Modal closeButton className="tiny remove-item-modal" show={!!removeData} {...other}>
+            <Modal
+                closeButton
+                className="tiny remove-item-modal"
+                show={!!removeData}
+                {...other}
+            >
                 {removeData &&
                 <div>
                     <h3>Remove {removeData.itemType}?</h3>

@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { flightCity } from '../../reducers';
+import React, {Component, PropTypes} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {flightCity} from '../../reducers';
 import * as actions from '../../actions/car';
 import DateHelper from '../../util/dateHelper';
 import CarCard from '../../components/CarCard';
@@ -26,7 +26,8 @@ class Car extends Component {
             name: PropTypes.string,
             bounds: PropTypes.shape({
                 south: PropTypes.number, west: PropTypes.number,
-                north: PropTypes.number, east: PropTypes.number}),
+                north: PropTypes.number, east: PropTypes.number
+            }),
             timezone: PropTypes.string
         }),
         cars: PropTypes.object,
@@ -155,37 +156,61 @@ class Car extends Component {
                         {this.selectedCar && 'Continue' || 'Skip'}
                     </Button>
                 </div>
+
                 <hr/>
+
                 <div className="row cars-search">
-                    <Filtering filters={this.props.filters} brands={this.state.brands} models={this.state.models}
-                               carTypes={this.state.carTypes} errorbrand={this.state.errorbrand}
-                               errormodel={this.state.errormodel} errorcarType={this.state.errorcarType}
-                               onFilterChange={this.handleFilterChange} />
+                    <Filtering
+                        filters={this.props.filters}
+                        brands={this.state.brands}
+                        models={this.state.models}
+                        carTypes={this.state.carTypes}
+                        errorbrand={this.state.errorbrand}
+                        errormodel={this.state.errormodel}
+                        errorcarType={this.state.errorcarType}
+                        onFilterChange={this.handleFilterChange}
+                    />
+
                     <div className="medium-5 columns cars-list-wrap">
-                        <CarsSort sorting={this.props.sorting} onSortChange={this.handleSortChange} />
+                        <CarsSort sorting={this.props.sorting} onSortChange={this.handleSortChange}/>
                         {this.state.cars.length && <ul className="cars-list">
                             {this.state.cars.map(car =>
-                                <CarCard key={car._id} car={car} onClick={this.selectCar}
-                                         className={`${this.selectedCar && (car._id == this.selectedCar._id) && 'selected'} || ''`}/>
+                                <CarCard
+                                    key={car._id}
+                                    car={car}
+                                    onClick={this.selectCar}
+                                    className={`${this.selectedCar && (car._id == this.selectedCar._id) && 'selected'} || ''`}
+                                />
                             )}
                         </ul>
                         ||
                         <h3 className="subheader">Cars not found</h3>}
                     </div>
+
                     <div className="medium-4 columns selection">
                         <h4 className="inline">Current selection</h4>
                         {this.selectedCar &&
-                        <IconButton className="mdi-close-circle float-right clear" title="Clear selection"
-                                    onClick={() => this.selectCar(null)}/>}
+                        <IconButton
+                            className="mdi-close-circle float-right clear"
+                            title="Clear selection"
+                            onClick={() => this.selectCar(null)}
+                        />}
                         {this.selectedCar &&
                         <div>
-                            <CarCard car={this.selectedCar} className="selected"
-                                     price={this.props.carDays * this.selectedCar.price}/>
+                            <CarCard
+                                car={this.selectedCar}
+                                className="selected"
+                                price={this.props.carDays * this.selectedCar.price}
+                            />
                             <div className="inline days float-right ">
                                 <span>Days to drive:</span>
-                                <InputNumber className="inline" min={1} max={this.props.maxDays}
-                                             value={this.props.carDays}
-                                             onChange={(num) => this.props.actions.setCarDays(num)} />
+                                <InputNumber
+                                    className="inline"
+                                    min={1}
+                                    max={this.props.maxDays}
+                                    value={this.props.carDays}
+                                    onChange={(num) => this.props.actions.setCarDays(num)}
+                                />
                             </div>
                         </div>
                         ||

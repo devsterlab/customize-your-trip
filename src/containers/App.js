@@ -100,6 +100,7 @@ class App extends Component {
             <div className="row height-100">
                 <div className="height-100">
                     <Header location={this.props.location}/>
+
                     <div className="tabs-content nav-tabs">
                         <div className="tabs-panel is-active height-100">
                             <Progress loaded={this.isDataLoaded() || this.props.connected === false} />
