@@ -45,11 +45,11 @@ module.exports = {
                 test: /\.js?$/,
                 include: path.join(__dirname, 'src'),
                 exclude: /node_modules/,
-                loaders: ['react-hot', 'babel']
+                loaders: ['react-hot-loader', 'babel-loader']
             },
             {
                 test: /(\.css|\.scss)$/,
-                loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+                loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
             },
             {
                 test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,

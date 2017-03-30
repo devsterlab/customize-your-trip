@@ -74,6 +74,10 @@ button {
   }
 }
 
+.tabs-panel {
+  display: block;
+}
+
 @import './components/IconButton/icon-button';
 @import './components/Card/card';
 @import './components/Sort/sort';

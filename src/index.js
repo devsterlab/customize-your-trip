@@ -6,7 +6,7 @@ import history from './util/history';
 import routes from './routes';
 import createStore from './store';
 import './app.scss';
-import 'file?name=favicon.png!../favicon.png';
+import 'file-loader?name=favicon.png!../favicon.png';
 
 //Needed to prevent multiple favicon requests. This issue appears if favicon href contains slashes.
 $('#favicon').remove();
